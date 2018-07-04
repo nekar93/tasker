@@ -183,13 +183,12 @@ public class DockerTaskRunner extends Runner<DockerTask> {
 
 			container.cmd("-c", arguments.toString());
 		} else {
-			if (task.getEntrypoint() == null) {
+			if (task.getEntrypoint() != null) {
+				container.entrypoint(task.getEntrypoint());
 
-			}
-			container.entrypoint(task.getEntrypoint());
-
-			if (task.getArguments() != null) {
-				container.cmd(task.getArguments());
+				if (task.getArguments() != null) {
+					container.cmd(task.getArguments());
+				}
 			}
 		}
 	}
